@@ -26,17 +26,17 @@ public class FieldExtractor {
         List<Map<String,Object>> list = new ArrayList<>();
         for (Item item : items){
             Map<String,Object> i = new HashMap<>();
+            List<String> strings = new ArrayList<>();
+            for (Category c : item.getCategory())
+                strings.add(c.toString());
             Log.d(getClass().getSimpleName(),item.getCategory().toString());
-            List<String> cats =new ArrayList<>();
-            for (Category s : item.getCategory())
-                cats.add(s.toString());
-
-            i.put(MainListAdapter.KEY_CATEGORIES,cats);
+            i.put(MainListAdapter.KEY_CATEGORIES,strings);
             i.put(MainListAdapter.KEY_DATE,item.getPubDate());
             i.put(MainListAdapter.KEY_DESCRIPTION,item.getDescription());
             i.put(MainListAdapter.KEY_TITLE, item.getTitle());
-            i.put(MainListAdapter.KEY_LINK, item.getGuid());
-            i.put(MainListAdapter.KEY_CREATOR, item.getCreator());
+            i.put(MainListAdapter.KEY_LINK, item.getLink());
+            i.put(MainListAdapter.KEY_CREATOR,item.getCreator());
+
             list.add(i);
 
             Log.d(getClass().getSimpleName(),item.toString());

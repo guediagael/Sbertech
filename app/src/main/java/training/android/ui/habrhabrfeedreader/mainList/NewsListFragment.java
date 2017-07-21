@@ -48,6 +48,7 @@ public class NewsListFragment extends Fragment implements MainListContract.MainL
         }
         mArticles = new ArrayList<>();
         mPresenter = new MainPresenter(this);
+        setRetainInstance(true);
 
 
     }

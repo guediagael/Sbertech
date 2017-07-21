@@ -63,20 +63,21 @@ public class DetailsActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.image_details);
 
         tvTitle = (TextView) findViewById(R.id.text_details_title);
-        tvTitle.setText(mTitle);
 
         tvDescription = (TextView)findViewById(R.id.text_details_description) ;
-        tvDescription.setText(mDescription);
 
         tvAuthor  = (TextView) findViewById(R.id.text_details_author);
-        tvAuthor.setText(mAuthor);
 
         tvCategories  = (TextView) findViewById(R.id.text_details_categories);
-        tvCategories.setText(mCategories);
 
         tvDate  = (TextView) findViewById(R.id.text_details_date);
-        tvDate.setText(mDate);
-
+        if (savedInstanceState==null) {
+            tvDescription.setText(mDescription);
+            tvAuthor.setText(mAuthor);
+            tvCategories.setText(mCategories);
+            tvTitle.setText(mTitle);
+            tvDate.setText(mDate);
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -96,6 +97,39 @@ public class DetailsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(EXTRA_LINK, mLink);
+        outState.putString(EXTRA_AUTHOR, mAuthor);
+        outState.putString(EXTRA_DATE, mDate);
+        outState.putString(EXTRA_CATEGORIES, mCategories);
+        outState.putString(EXTRA_TITLE,mTitle);
+        outState.putString(EXTRA_PICTURE, mArticlePicture);
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mLink = savedInstanceState.getString(EXTRA_LINK);
+        mArticlePicture = savedInstanceState.getString(EXTRA_PICTURE);
+        mTitle =savedInstanceState.getString(EXTRA_TITLE);
+        mDate = savedInstanceState.getString(EXTRA_DATE);
+        mDescription = savedInstanceState.getString(EXTRA_DESCRIPTION);
+        mAuthor = savedInstanceState.getString(EXTRA_AUTHOR);
+        mCategories = savedInstanceState.getString(EXTRA_CATEGORIES);
+        tvDescription.setText(mDescription);
+        tvAuthor.setText(mAuthor);
+        tvCategories.setText(mCategories);
+        tvTitle.setText(mTitle);
+        tvDate.setText(mDate);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     public class PictureExtractorTask extends AsyncTask<String,Void,Bitmap> {
         private ImageView imageView;
