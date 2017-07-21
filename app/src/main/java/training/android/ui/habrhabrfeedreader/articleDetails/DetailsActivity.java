@@ -18,13 +18,13 @@ import java.net.URL;
 
 import training.android.ui.habrhabrfeedreader.R;
 
-import static training.android.ui.habrhabrfeedreader.mainList.MainActivity.EXTRA_AUTHOR;
-import static training.android.ui.habrhabrfeedreader.mainList.MainActivity.EXTRA_CATEGORIES;
-import static training.android.ui.habrhabrfeedreader.mainList.MainActivity.EXTRA_DATE;
-import static training.android.ui.habrhabrfeedreader.mainList.MainActivity.EXTRA_DESCRIPTION;
-import static training.android.ui.habrhabrfeedreader.mainList.MainActivity.EXTRA_LINK;
-import static training.android.ui.habrhabrfeedreader.mainList.MainActivity.EXTRA_PICTURE;
-import static training.android.ui.habrhabrfeedreader.mainList.MainActivity.EXTRA_TITLE;
+import static training.android.ui.habrhabrfeedreader.mainList.ui.MainActivity.EXTRA_AUTHOR;
+import static training.android.ui.habrhabrfeedreader.mainList.ui.MainActivity.EXTRA_CATEGORIES;
+import static training.android.ui.habrhabrfeedreader.mainList.ui.MainActivity.EXTRA_DATE;
+import static training.android.ui.habrhabrfeedreader.mainList.ui.MainActivity.EXTRA_DESCRIPTION;
+import static training.android.ui.habrhabrfeedreader.mainList.ui.MainActivity.EXTRA_LINK;
+import static training.android.ui.habrhabrfeedreader.mainList.ui.MainActivity.EXTRA_PICTURE;
+import static training.android.ui.habrhabrfeedreader.mainList.ui.MainActivity.EXTRA_TITLE;
 
 public class DetailsActivity extends AppCompatActivity {
     private String mLink;

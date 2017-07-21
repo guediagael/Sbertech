@@ -9,7 +9,6 @@ import org.simpleframework.xml.Root;
 
 import java.util.List;
 
-import static android.R.attr.name;
 
 /**
  * Created by guedi on 7/21/2017.
@@ -19,24 +18,24 @@ import static android.R.attr.name;
 public class Item {
 
     @Element(name = "title", required = true)
-    String title;//The title of the item.	Venice Film Festival Tries to Quit Sinking
+    String title;
 
     @Element(name = "link", required = true)
-    String link;//The LINK of the item.	http://www.nytimes.com/2002/09/07/movies/07FEST.html
+    String link;
 
     @Element(name = "description", required = true )
-    String description;//The item synopsis.	Some of the most heated chatter at the Venice Film Festival this week was about the way that the arrival of the stars at the Palazzo del Cinema was being staged.
+    String description;
 
 
     @ElementList(name = "category", required = true, inline = true)
-    List<Category> category;//Includes the item in one or more categories. More.	Simpsons Characters
+    List<Category> category;
 
 
     @Element(name = "guid", required = false)
-    String guid;//A string that uniquely identifies the item. More.	<guid isPermaLink="true">http://inessential.com/2002/09/01.php#a2</guid>
+    String guid;
 
     @Element(name = "pubDate", required = false)
-    String pubDate;//	Indicates when the item was published. More.	Sun, 19 May 2002 15:21:36 GMT
+    String pubDate;
 
     @Namespace( prefix="dc", reference="http://purl.org/dc/elements/1.1/")
     @Element(name = "creator", required = false)

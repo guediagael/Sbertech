@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import training.android.ui.habrhabrfeedreader.mainList.MainListAdapter;
+import training.android.ui.habrhabrfeedreader.mainList.ui.MainListAdapter;
 import training.android.ui.habrhabrfeedreader.mainList.models.Category;
 import training.android.ui.habrhabrfeedreader.mainList.models.Item;
 
@@ -24,12 +24,13 @@ public class FieldExtractor {
 
     public List<Map<String,Object>> extract(){
         List<Map<String,Object>> list = new ArrayList<>();
+
         for (Item item : items){
             Map<String,Object> i = new HashMap<>();
             List<String> strings = new ArrayList<>();
-            for (Category c : item.getCategory())
-                strings.add(c.toString());
-            Log.d(getClass().getSimpleName(),item.getCategory().toString());
+
+            for (Category c : item.getCategory())  strings.add(c.getLink());
+
             i.put(MainListAdapter.KEY_CATEGORIES,strings);
             i.put(MainListAdapter.KEY_DATE,item.getPubDate());
             i.put(MainListAdapter.KEY_DESCRIPTION,item.getDescription());

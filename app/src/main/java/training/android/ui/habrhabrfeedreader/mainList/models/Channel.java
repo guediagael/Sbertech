@@ -22,7 +22,6 @@ public class Channel {
     public List<Item> itemList;
 
 
-    // Tricky part in Simple XML because the link is named twice
     @ElementList(entry = "link", inline = true, required = false)
     public List<Link> links;
 
@@ -32,8 +31,6 @@ public class Channel {
     @Element
     String language;
 
-//    @Element(name = "ttl", required = false)
-//    int ttl;
 
     @Element(name = "pubDate", required = false)
     String pubDate;

@@ -1,11 +1,13 @@
-package training.android.ui.habrhabrfeedreader.mainList;
+package training.android.ui.habrhabrfeedreader.mainList.ui;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +17,11 @@ import java.util.List;
 import java.util.Map;
 
 import training.android.ui.habrhabrfeedreader.R;
+import training.android.ui.habrhabrfeedreader.mainList.MainListContract;
+import training.android.ui.habrhabrfeedreader.mainList.MainPresenter;
 
 
-public class NewsListFragment extends Fragment implements MainListContract.MainListView{
+public class NewsListFragment extends Fragment implements MainListContract.MainListView {
 
     private static final String ARG_URL = "baseUrl";
 
@@ -67,8 +71,24 @@ public class NewsListFragment extends Fragment implements MainListContract.MainL
         rvNewsList.setLayoutManager( new LinearLayoutManager(getActivity()));
         rvNewsList.setAdapter(new MainListAdapter(mArticles));
 
+        ((SwipeRefreshLayout)view).setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.fetchData(mBaseUrl);
+            }
+        });
+
         mPresenter.fetchData(mBaseUrl);
 
+
+    }
+
+    public void cancelRefresh(){
+        SwipeRefreshLayout layout = ((SwipeRefreshLayout)this.getView());
+        if (layout != null && layout.isRefreshing()) {
+            layout.setRefreshing(false);
+        } else
+            Log.d(getClass().getSimpleName(),"null view ");
     }
 
     @Override
@@ -84,6 +104,7 @@ public class NewsListFragment extends Fragment implements MainListContract.MainL
 
     @Override
     public void DataLoaded(List<Map<String, Object>> news) {
+        cancelRefresh();
         mArticles.clear();
         mArticles.addAll(news);
         rvNewsList.getAdapter().notifyDataSetChanged();

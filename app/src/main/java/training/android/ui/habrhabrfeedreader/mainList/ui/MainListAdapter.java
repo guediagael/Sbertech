@@ -1,6 +1,8 @@
-package training.android.ui.habrhabrfeedreader.mainList;
+package training.android.ui.habrhabrfeedreader.mainList.ui;
 
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +10,6 @@ import android.view.ViewGroup;
 
 import java.util.List;
 import java.util.Map;
-
 import training.android.ui.habrhabrfeedreader.R;
 
 /**
@@ -50,18 +51,25 @@ public class MainListAdapter extends RecyclerView.Adapter<MainRecyclerViewHolder
         final String title = (String)article.get(KEY_TITLE);
         final List<String> categories =(List<String>)article.get(KEY_CATEGORIES);
         final String date = (String)article.get(KEY_DATE);
-        holder.setData(title,date,categories);
-
+        final String creator = (String)article.get(KEY_CREATOR);
         final String link = (String) article.get(KEY_LINK);
+
         String description = (String)article.get(KEY_DESCRIPTION);
-        Log.d(getClass().getSimpleName(), description);
 
 
         String s = "<img src=\"";
         int ix = description.indexOf(s)+s.length();
-        final String parsedDescription = "";
         final String picture =description.substring(ix, description.indexOf("\"", ix+1)) ;
-        final String creator = (String)article.get(KEY_CREATOR);
+
+        final String parsedDescription ;
+        if (Build.VERSION.SDK_INT >= 24) {
+            parsedDescription  = Html.fromHtml(description, 0).toString();
+        } else {
+            parsedDescription = Html.fromHtml(description).toString() ;
+        }
+
+
+        holder.setData(title,date,categories,parsedDescription,creator);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,4 +90,8 @@ public class MainListAdapter extends RecyclerView.Adapter<MainRecyclerViewHolder
         void openDetails(String link, String articlePicture, String title, String date,
                          String description,String author, List<String> categories);
     }
+
+
+
+
 }
